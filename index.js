@@ -50,18 +50,22 @@ app.get(
 );
 
 app.get("/auth/failure", (req, res) => {
-  res.send("Something Went Wrong...");
+  res.send('<div><p>Something Went Wrong... </p><a href="/">Login</a></div>');
 });
 
 app.get("/protected", isLoggedIn, (req, res) => {
-  res.send(`Hello ${req.user.displayName}! This is a protected route`);
+  res.send(
+    `<div><p>Hello ${req.user.displayName}! This is a protected route.</p><a href="/logout">Logout</a></div>`
+  );
 });
 
 app.get("/logout", (req, res) => {
   req.logout();
   // destroys our current session aka remove cookie session
-  req.session.destroy()
-  res.send("Goodbye!");
+  req.session.destroy();
+  res.send(
+    '<div><p>Goodbye! Logged Out Successfully</p><a href="/">Login</a></div>'
+  );
 });
 
 app.listen(8000, () => console.log("Listening on PORT: 8000"));
