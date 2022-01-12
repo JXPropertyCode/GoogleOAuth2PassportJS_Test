@@ -1,0 +1,22 @@
+{
+  "name": "googleoauth2passportjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "dotenv": "^11.0.0",
+    "express": "^4.17.2",
+    "express-session": "^1.17.2",
+    "passport": "^0.5.2",
+    "passport-google-oauth2": "^0.2.0"
+  }
+}
