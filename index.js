@@ -20,10 +20,16 @@ const app = express();
 app.use(
   session({
     secret: process.env.SECRET,
+    // don't resave if nothing has changed
     resave: false,
+    // don't create a session if something isn't stored
     saveUninitialized: false,
+    // you can add a store to store into MongoDB database
+    // reference to https://www.youtube.com/watch?v=SBvmnHTQIPY&ab_channel=TraversyMedia at 1:08:39
   })
 );
+
+// passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -36,13 +42,14 @@ app.get(
   "/auth/google",
   // this is for authenticating for that specific provider based on their selection
   // scope is what information do we want to retrieve from the user profile
-  // it is using our google passport strategy to pass in details at auth.js
+  // it is using our 'google' passport strategy to pass in details at auth.js
   passport.authenticate("google", { scope: ["email", "profile"] })
 );
 
 app.get(
   "/google/callback",
   // make sure the user is authentic when accessing this route
+  // authenticates using 'google' strategy
   passport.authenticate("google", {
     successRedirect: "/protected",
     failureRedirect: "/auth/failure",
